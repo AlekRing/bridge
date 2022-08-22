@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import InputCommon from '@/components/inputCommon/InputCommon';
+import InputCommon from '@/components/InputCommon/InputCommon';
 import styles from './styles.scss';
 import ButtonCommon from '@/components/ButtonCommon/ButtonCommon';
 

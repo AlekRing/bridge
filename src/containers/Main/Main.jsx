@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import Balance from '@/components/Balance/Balance';
 import Header from '@/containers/Header/Header';
+import Game from '@/containers/Game/Game';
 import styles from './styles.scss';
 
 const Main = () => {
@@ -27,6 +28,7 @@ const Main = () => {
                 <Balance />
                 <h1>Кто выйграет?</h1>
                 <span>Сыграй!</span>
+                <Game />
             </main>
         </>
     )
