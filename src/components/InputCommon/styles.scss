@@ -1,0 +1,17 @@
+.inputCommon {
+    width: 30vw;
+    height: 3vw;
+    text-align: center;
+    font-size: 1.5vw;
+    color: #000;
+    border: none;
+}
+
+@media (max-width: 980px) {
+    .inputCommon {
+        width: 40vw;
+        height: 4vw;
+        text-align: center;
+        font-size: 2.5vw;
+    }
+}

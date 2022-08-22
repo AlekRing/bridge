@@ -1,0 +1,22 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        margin-top: 0.2vw;
+        margin-bottom: 1vw;
+    }
+}
+
+.loginTitle {
+    padding: 1.5vw;
+    text-align: center;
+}
+
+.error {
+    margin-bottom: 1vw;
+    font-size: 1.6vw;
+    color: rgb(163, 2, 2);
+}
