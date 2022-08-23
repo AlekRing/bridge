@@ -1,8 +1,10 @@
 .gameBoard {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 3vw auto;
     width: 70%;
+    max-width: 800px;
     justify-content: space-around;
     align-items: center;
 
@@ -17,4 +19,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.btn {
+    margin-top: 1.5vw;
+    width: max-content;
+}
+
+.loading::after {
+    position: absolute;
+    display: block;
+    content: 'LOADING...';
+    width: 100%;
+    height: 100%;
+    font-size: 3vw;
+    background: rgba(18, 33, 102, 0.26);
 }

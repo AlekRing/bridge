@@ -1,16 +1,5 @@
-import { put, call, takeEvery } from "redux-saga/effects";
-import { addCards, startShake } from "@/store/reducers/cards";
-
-function* shakeCards() {
-  try {
-    const res = yield fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1');
-    const {deck_id} = yield res.json();
-
-    yield getTwoCards(deck_id);
-  } catch (error) {
-    console.error(error);
-  }
-}
+import { put, takeEvery } from 'redux-saga/effects';
+import { addCards, startShake } from '@/store/reducers/cards.js';
 
 function* getTwoCards(deck_id) {
   try {
@@ -23,6 +12,17 @@ function* getTwoCards(deck_id) {
   }
 }
 
-export function* root() {
+function* shakeCards() {
+  try {
+    const res = yield fetch('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1');
+    const { deck_id } = yield res.json();
+
+    yield getTwoCards(deck_id);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export default function* rootCards() {
   yield takeEvery(startShake, shakeCards);
 }

@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '@/components/Card/Card';
 import { startShake } from '@/store/reducers/cards';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFirstCard, selectSecondCard } from '@/store/selectors';
+import { selectFirstCard, selectSecondCard, selectIsLoading, selectBalance } from '@/store/selectors';
 import { add, subtract } from '@/store/reducers/balance';
+import InputCommon from '@/components/InputCommon/InputCommon';
 import ButtonCommon from '@/components/ButtonCommon/ButtonCommon';
+import classNames from 'classnames';
 import styles from './styles.scss';
-
-// const CARDS_COUNT = 2;
 
 const cardsValues = {
     JACK: 11,
@@ -16,10 +16,17 @@ const cardsValues = {
     ACE: 14,
 };
 
+const cardBack = 'https://www.seekpng.com/png/full/121-1215767_back-of-card-cards-back.png';
+
 const Game = () => {
     const dispatch = useDispatch();
     const firstCard = useSelector(selectFirstCard);
     const secondCard = useSelector(selectSecondCard);
+    const balance = useSelector(selectBalance);
+    const isLoading = useSelector(selectIsLoading);
+
+    const [bet, setBet] = useState(0);
+    const [isTouched, setIsTouched] = useState(false);
 
     useEffect(() => {
         dispatch(startShake());
@@ -30,26 +37,37 @@ const Game = () => {
         const secondVal = cardsValues[secondCard.value] || secondCard.value;
         const numberVal = cardsValues[value] || Number(value);
 
+        setIsTouched(true);
         if (numberVal < firstVal || numberVal < secondVal) {
-            console.log(numberVal, 'you loose');
-            return;
+            return dispatch(subtract(bet));
         }
 
-        console.log(numberVal, 'you win!');
-        dispatch(add(10));
+        dispatch(add(bet * 2));
+    };
+
+    const handleBetChange = (e) => {
+        setBet(e.target.value);
     };
 
     const refreshCards = () => {
         dispatch(startShake());
+        setIsTouched(false);
     };
 
     return (
         <div className={styles.gameBoard}>
-            <ButtonCommon text='New Cards' action={refreshCards} />
-            <div className={styles.cards}>
-                <Card img={firstCard?.image} value={firstCard?.value} handleClick={handleClick}/>
+            <InputCommon placeholder='Ваша ставка...' type='number' value={bet} onChange={handleBetChange} max={balance}/>
+            <ButtonCommon text='Новый раунд!' action={refreshCards} customStyles={styles.btn} />
+            <div className={classNames(styles.cards, isLoading && styles.loading)}>
+                {isTouched
+                    ? <Card img={firstCard?.image} value={null} handleClick={()=>{}}/>
+                    : <Card img={cardBack} value={firstCard?.value} handleClick={handleClick} />
+                }
                 <h6>VS</h6>
-                <Card img={secondCard?.image} value={secondCard?.value} handleClick={handleClick}/>
+                {isTouched
+                    ? <Card img={secondCard?.image} value={null} handleClick={()=>{}}/>
+                    : <Card img={cardBack} value={secondCard?.value} handleClick={handleClick} />
+                }
             </div>
         </div>
     )
