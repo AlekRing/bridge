@@ -2,12 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const cardsSlice = createSlice({
     name: 'cards',
-    initialState: {
-      cards: []
-    },
+    initialState: [],
     reducers: {
       startShake: (state) => state,
-      addCards: (state, action) => [...action.payload, ...state.cards],
+      addCards: (state, action) => [...action.payload, ...state],
       deleteCards: () => initialState,
     }
   })

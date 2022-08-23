@@ -19,7 +19,7 @@ function* getTwoCards(deck_id) {
 
     yield put(addCards(data.cards));
   } catch (error) {
-    console.error(error);
+    console.error('Fetching cards error: ', error);
   }
 }
 

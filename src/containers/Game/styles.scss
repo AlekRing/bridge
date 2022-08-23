@@ -1,5 +1,6 @@
 .gameBoard {
     display: flex;
+    flex-direction: column;
     margin: 3vw auto;
     width: 70%;
     justify-content: space-around;
@@ -8,4 +9,12 @@
     & h6 {
         font-size: 4vw;
     }
+}
+
+.cards {
+    margin-top: 2vw;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
